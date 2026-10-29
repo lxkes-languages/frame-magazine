@@ -1,1 +1,173 @@
-const menu=document.querySelector('.menu-toggle'),nav=document.querySelector('.nav');menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}));document.querySelector('#year').textContent=new Date().getFullYear();const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;document.querySelector('#progress').style.width=(max>0?scrollY/max*100:0)+'%'},{passive:true});document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.journal-item').forEach(el=>el.hidden=btn.dataset.filter!=='all'&&el.dataset.category!==btn.dataset.filter)}));const articles={'1':{category:'ART & CULTURE',title:'The spaces between things',image:'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1400&q=85',alt:'Art in a gallery',text:['Some spaces ask us to slow down. The light, the silence, the distance between one object and the next: all of it shapes how we look.','This is a sample editorial story. Replace this writing with your own perspective, research, photography or interviews before publishing FRAME as a magazine.']},'2':{category:'PHOTOGRAPHY',title:'Somewhere, slowly',image:'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=85',alt:'Mountain lake',text:['A landscape changes with the hour. What first appears still becomes a collection of small movements, colours and reflections.','This sample article demonstrates the full-screen reading experience. Add your own work and image credits to make it yours.']},'3':{category:'JOURNAL',title:'The shape of a city',image:'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=85',alt:'Architecture',text:['Cities are made of buildings, but also of memories, routines and the paths we take without thinking.','This is placeholder copy for your future journal. You can expand it with photographs, interviews and longer essays.']}};const dialog=document.querySelector('#article-dialog'),content=document.querySelector('#article-content');function route(){const match=location.hash.match(/^#article-(\d+)$/);if(!match||!articles[match[1]]){if(dialog.open)dialog.close();return}const a=articles[match[1]];content.replaceChildren();const body=document.createElement('div');body.className='article-body';const img=document.createElement('img');img.src=a.image;img.alt=a.alt;const tag=document.createElement('p');tag.className='kicker';tag.textContent=a.category+' / FRAME JOURNAL';const title=document.createElement('h2');title.textContent=a.title;body.append(img,tag,title);a.text.forEach(t=>{const p=document.createElement('p');p.textContent=t;body.append(p)});content.append(body);if(!dialog.open)dialog.showModal()}window.addEventListener('hashchange',route);dialog.querySelector('.close-dialog').addEventListener('click',()=>{location.hash='journal'});dialog.addEventListener('click',e=>{if(e.target===dialog)location.hash='journal'});dialog.addEventListener('close',()=>{if(location.hash.startsWith('#article-'))location.hash='journal'});route();
+/* FRAME v3 — independent enhancements, no build step required. */
+'use strict';
+
+function initMenu() {
+  const menu = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#nav');
+
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    menu.setAttribute('aria-expanded', String(open));
+    menu.querySelector('span').textContent = open ? '−' : '＋';
+  }
+
+  menu.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+  nav.addEventListener('click', event => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && nav.classList.contains('open')) {
+      setOpen(false);
+      menu.focus();
+    }
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.site-header')) setOpen(false);
+  });
+  window.matchMedia('(max-width: 700px)').addEventListener('change', () => setOpen(false));
+}
+
+function initReveals() {
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(element => {
+    element.classList.add('will-reveal');
+    observer.observe(element);
+  });
+}
+
+function initProgress() {
+  const progress = document.querySelector('#progress');
+  let scheduled = false;
+
+  function update() {
+    const distance = document.documentElement.scrollHeight - window.innerHeight;
+    const fraction = distance > 0 ? Math.max(0, Math.min(1, window.scrollY / distance)) : 0;
+    progress.style.transform = `scaleX(${fraction})`;
+    scheduled = false;
+  }
+
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('load', schedule);
+  // Filtering, image loading and opening the reader can all change page height.
+  if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(document.body);
+  update();
+}
+
+function initFilters() {
+  const buttons = [...document.querySelectorAll('.filter')];
+  const stories = [...document.querySelectorAll('.journal-item')];
+  const status = document.querySelector('#filter-status');
+
+  buttons.forEach(button => button.addEventListener('click', () => {
+    buttons.forEach(candidate => {
+      const active = candidate === button;
+      candidate.classList.toggle('active', active);
+      candidate.setAttribute('aria-pressed', String(active));
+    });
+    stories.forEach(story => {
+      story.hidden = button.dataset.filter !== 'all' && story.dataset.category !== button.dataset.filter;
+    });
+    const count = stories.filter(story => !story.hidden).length;
+    status.textContent = `${count} ${count === 1 ? 'story' : 'stories'}`;
+  }));
+}
+
+function initArticleReader() {
+  const dialog = document.querySelector('#article-dialog');
+  const content = document.querySelector('#article-content');
+  let returnHash = '#journal';
+  let opener = null;
+
+  // Remember where each reading session started, including a filtered journal.
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#article-"]');
+    if (!link || dialog.open) return;
+    opener = link;
+    returnHash = location.hash.startsWith('#article-') ? '#journal' : (location.hash || '#spotlight');
+  });
+
+  function closeArticle() {
+    if (location.hash.startsWith('#article-')) {
+      // Replacing the reader URL avoids a back-button loop when dismissing it.
+      history.replaceState(null, '', returnHash);
+    }
+    if (dialog.open) dialog.close();
+  }
+
+  function renderArticle(article) {
+    const body = document.createElement('div');
+    body.className = 'article-body';
+    const image = document.createElement('img');
+    image.src = article.image;
+    image.alt = article.alt;
+    image.width = 1400;
+    image.height = 824;
+    const tag = document.createElement('p');
+    tag.className = 'kicker';
+    tag.textContent = `${article.category} / FRAME journal`;
+    const title = document.createElement('h2');
+    title.id = 'article-title';
+    title.textContent = article.title;
+    body.append(image, tag, title);
+    article.text.forEach(text => {
+      const paragraph = document.createElement('p');
+      paragraph.textContent = text;
+      body.append(paragraph);
+    });
+    content.replaceChildren(body);
+  }
+
+  function route() {
+    const match = location.hash.match(/^#article-(\d+)$/);
+    const article = match && articles[match[1]];
+    if (!article) {
+      if (dialog.open) dialog.close();
+      return;
+    }
+    renderArticle(article);
+    if (!dialog.open) dialog.showModal();
+    dialog.scrollTop = 0;
+  }
+
+  dialog.querySelector('.close-dialog').addEventListener('click', closeArticle);
+  dialog.addEventListener('cancel', event => {
+    event.preventDefault();
+    closeArticle();
+  });
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const bounds = dialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeArticle();
+  });
+  dialog.addEventListener('close', () => {
+    if (location.hash.startsWith('#article-')) history.replaceState(null, '', returnHash);
+    if (opener?.isConnected) opener.focus({ preventScroll: true });
+    opener = null;
+  });
+  window.addEventListener('hashchange', route);
+  route();
+}
+
+document.documentElement.classList.add('js');
+document.querySelector('#year').textContent = new Date().getFullYear();
+initMenu();
+initReveals();
+initProgress();
+initFilters();
+initArticleReader();
