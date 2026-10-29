@@ -1,0 +1,8 @@
+title: FRAME
+url: https://lxkes-languages.github.io
+baseurl: /frame-magazine
+# GitHub Pages runs Jekyll to collect published story files into stories.json.
+exclude:
+  - README.md
+  - docs
+  - tests
