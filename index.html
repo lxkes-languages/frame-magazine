@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="stylesheet" href="style.css">
   <script src="articles.js" defer></script>
+  <script src="content.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -90,6 +91,7 @@
 
     <section class="section journal page-gutter" id="journal" aria-labelledby="journal-title">
       <div class="section-head"><div><p class="kicker">From the journal / 04</p><h2 id="journal-title">Latest stories<span class="dot">.</span></h2></div><div class="filters" role="group" aria-label="Filter stories"><button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter" type="button" data-filter="art" aria-pressed="false">Art</button><button class="filter" type="button" data-filter="photography" aria-pressed="false">Photo</button><button class="filter" type="button" data-filter="journal" aria-pressed="false">Journal</button></div></div>
+      <p id="content-status" class="content-status" role="status">Loading the latest stories…</p>
       <p class="sr-only" id="filter-status" role="status">3 stories</p>
       <div class="journal-list">
         <a class="journal-item" href="#article-1" data-category="art"><span>01</span><strong>The spaces between things</strong><span>Art & Culture</span><span class="arrow" aria-hidden="true">↗</span></a>
@@ -101,7 +103,8 @@
     <section class="about page-gutter" id="about" aria-labelledby="about-title"><p class="kicker">Independent in spirit / 05</p><div><h2 id="about-title">Good stories<br>deserve <em>space.</em></h2><p>FRAME is an independent visual journal for curious minds. We celebrate original perspectives across art, photography, travel and contemporary culture.</p><a href="mailto:hello@example.com" class="under-link" title="Sample contact — replace with your email address">Get in touch <span aria-hidden="true">↗</span></a></div></section>
   </main>
 
-  <footer class="page-gutter"><a class="logo" href="#home">FRAME<span class="dot">.</span></a><span>Independent visual journal © <span id="year">2026</span></span><a href="#home">Back to top ↑</a></footer>
+  <footer class="page-gutter"><a class="logo" href="#home">FRAME<span class="dot">.</span></a><span>Independent visual journal © <span id="year">2026</span></span><a href="admin/">Editor login</a><a href="#home">Back to top ↑</a></footer>
   <dialog id="article-dialog" class="article-dialog" aria-labelledby="article-title"><button class="close-dialog" type="button" aria-label="Close article" autofocus>✕</button><div id="article-content"></div></dialog>
 </body>
 </html>
+

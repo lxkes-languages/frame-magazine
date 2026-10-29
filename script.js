@@ -71,7 +71,6 @@ function initProgress() {
 
 function initFilters() {
   const buttons = [...document.querySelectorAll('.filter')];
-  const stories = [...document.querySelectorAll('.journal-item')];
   const status = document.querySelector('#filter-status');
 
   buttons.forEach(button => button.addEventListener('click', () => {
@@ -80,6 +79,7 @@ function initFilters() {
       candidate.classList.toggle('active', active);
       candidate.setAttribute('aria-pressed', String(active));
     });
+    const stories = [...document.querySelectorAll('.journal-item')];
     stories.forEach(story => {
       story.hidden = button.dataset.filter !== 'all' && story.dataset.category !== button.dataset.filter;
     });
@@ -114,8 +114,8 @@ function initArticleReader() {
     const body = document.createElement('div');
     body.className = 'article-body';
     const image = document.createElement('img');
-    image.src = article.image;
-    image.alt = article.alt;
+    if (article.image) image.src = article.image;
+    image.alt = article.alt || '';
     image.width = 1400;
     image.height = 824;
     const tag = document.createElement('p');
@@ -124,23 +124,37 @@ function initArticleReader() {
     const title = document.createElement('h2');
     title.id = 'article-title';
     title.textContent = article.title;
-    body.append(image, tag, title);
+    if (article.image) body.append(image);
+    if (article.credit) body.append(Object.assign(document.createElement('p'), { className: 'image-credit', textContent: article.credit }));
+    body.append(tag, title);
     article.text.forEach(text => {
       const paragraph = document.createElement('p');
       paragraph.textContent = text;
       body.append(paragraph);
     });
+    (article.gallery || []).forEach(photo => {
+      const figure = document.createElement('figure');
+      const image = document.createElement('img');
+      Object.assign(image, { src: photo.image, alt: photo.alt, loading: 'lazy', width: 1400, height: 1000 });
+      figure.append(image);
+      if (photo.caption) figure.append(Object.assign(document.createElement('figcaption'), { textContent: photo.caption }));
+      body.append(figure);
+    });
     content.replaceChildren(body);
   }
 
   function route() {
-    const match = location.hash.match(/^#article-(\d+)$/);
+    const match = location.hash.match(/^#article-([a-z0-9]+(?:-[a-z0-9]+)*)$/);
     const article = match && articles[match[1]];
-    if (!article) {
+    if (!match) {
       if (dialog.open) dialog.close();
       return;
     }
-    renderArticle(article);
+    renderArticle(article || {
+      title: FRAMEContent.state.loaded ? 'Story unavailable' : 'Loading story…',
+      category: 'FRAME',
+      text: [FRAMEContent.state.loaded ? 'This story may have been removed. Close the reader to explore the journal.' : 'Your story will appear as soon as it has loaded.']
+    });
     if (!dialog.open) dialog.showModal();
     dialog.scrollTop = 0;
   }
@@ -161,6 +175,7 @@ function initArticleReader() {
     opener = null;
   });
   window.addEventListener('hashchange', route);
+  document.addEventListener('frame:content-ready', route);
   route();
 }
 
@@ -171,3 +186,6 @@ initReveals();
 initProgress();
 initFilters();
 initArticleReader();
+
+
+FRAMEContent.load();
