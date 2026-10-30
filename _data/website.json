@@ -6,12 +6,12 @@
     "description": "Photography, people, places and ideas that deserve a second look."
   },
   "about": {
-    "kicker": "Independent in spirit / 05",
-    "heading": "Good stories\ndeserve",
-    "description": "FRAME is an independent visual journal for curious minds. We celebrate original perspectives across art, photography, travel and contemporary culture.",
-    "contact_label": "Get in touch",
-    "email": "hello@example.com",
-    "emphasis": "space.",
+    "kicker": "Independence ~ me / 05",
+    "heading": "Stories I find",
+    "description": "Luke. is an independent visual journal for things that interest me.",
+    "contact_label": "l",
+    "email": "",
+    "emphasis": "interesting.",
     "ending": ""
   },
   "visibility": {
@@ -45,7 +45,7 @@
   "feature": {
     "heading": "Images\nthat",
     "caption": "Field notes / The Italian coast",
-    "ending": "\nwith us.",
+    "ending": "in your mind.",
     "alt": "Colourful buildings overlooking the Italian coastline",
     "link_label": "Inside the visual journal",
     "kicker": "The visual archive / 03",
