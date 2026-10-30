@@ -12,8 +12,8 @@ for (const name of await readdir(new URL('_data/stories/', root))) {
   records[name.replace(/\.json$/, '')] = JSON.parse(await read('_data/stories/' + name));
 }
 const stories = content.normaliseStories(records, base);
-assert.equal(stories.length, 3);
-assert.deepEqual(Array.from(stories, story => story.id), ['1', '2', '3']);
+assert.equal(stories.length, Object.keys(records).length);
+const seed = { title: 'Fixture', image: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e', alt: 'A lake', text: ['A paragraph'], category: 'Journal', date: '2026-01-01' };
 for (const story of stories) assert.ok(story.text.length && story.image && story.alt);
 assert.equal(content.imageUrl('/frame-magazine/uploads/new-photo.webp', base), base + 'uploads/new-photo.webp');
 assert.equal(content.imageUrl('uploads/new-photo.jpg', base), base + 'uploads/new-photo.jpg');
@@ -22,12 +22,12 @@ for (const url of ['javascript:alert(1)', 'data:image/svg+xml,test', '/frame-mag
 }
 const published = {
   ...records,
-  'a-new-story': { ...records['1'], date: '2026-11-01', title: '<script>text stays text</script>', gallery: [null, { image: 'javascript:alert(1)', alt: 'unsafe' }, { image: 'uploads/gallery.jpg', alt: 'A gallery image', caption: 'Photo credit' }] },
-  'bad/id': records['1'],
+  'a-new-story': { ...seed, date: '9999-12-31', title: '<script>text stays text</script>', gallery: [null, { image: 'javascript:alert(1)', alt: 'unsafe' }, { image: 'uploads/gallery.jpg', alt: 'A gallery image', caption: 'Photo credit' }] },
+  'bad/id': seed,
   broken: { title: 'No image or text' }
 };
 const result = content.normaliseStories(published, base);
-assert.equal(result.length, 4);
+assert.equal(result.length, stories.length + 1);
 assert.equal(result[0].id, 'a-new-story');
 assert.equal(result[0].title, '<script>text stays text</script>');
 assert.equal(result[0].gallery.length, 1);
@@ -55,3 +55,4 @@ for (const authBaseUrl of ['', 'http://unsafe.example', 'https://name:secret@exa
   assert.ok(status.textContent.includes('owner') || status.textContent.includes('HTTPS origin'));
 }
 console.log('PASS: existing content, new story ordering, upload subpaths, invalid records/URLs, gallery validation, draft workflow and unconfigured/invalid login states.');
+

@@ -188,4 +188,6 @@ initFilters();
 initArticleReader();
 
 
+FRAMEWebsite.ready = FRAMEWebsite.load();
 FRAMEContent.load();
+

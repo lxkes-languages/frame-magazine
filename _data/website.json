@@ -1,0 +1,79 @@
+{
+  "branding": {
+    "name": "FRAME",
+    "logo": "",
+    "title": "FRAME — Independent Visual Journal",
+    "description": "FRAME — an independent visual journal of art, photography, people and places. A new perspective, in every frame.",
+    "tagline": "An independent visual journal",
+    "edition": "Issue 001 — A new perspective",
+    "header_link": "Stay curious ↗",
+    "nav_note": "A different point of view. ↙",
+    "footer": "Independent visual journal",
+    "colours": {
+      "paper": "#f3f1eb",
+      "ink": "#20221e",
+      "accent": "#d74a2f",
+      "sage": "#dfe3d8"
+    },
+    "socials": []
+  },
+  "navigation": {
+    "home": "Home",
+    "spotlight": "Spotlight",
+    "art": "Art & Culture",
+    "photography": "Photography",
+    "journal": "Journal",
+    "about": "About"
+  },
+  "intro": {
+    "headline": "The art of",
+    "emphasis": "looking closer.",
+    "description": "Photography, people, places and ideas that deserve a second look."
+  },
+  "spotlight": {
+    "heading": "In the spotlight",
+    "label": "01 / Editor’s selection",
+    "kicker": "Beyond the ordinary",
+    "story": "",
+    "link_label": "Explore the story"
+  },
+  "stories": {
+    "kicker": "A closer look / 02",
+    "heading": "Fresh perspectives",
+    "description": "Culture is everywhere.\nWe just have to notice."
+  },
+  "marquee": "AN INDEPENDENT PERSPECTIVE ✳ ART ✳ CULTURE ✳ PHOTOGRAPHY ✳",
+  "feature": {
+    "kicker": "The visual archive / 03",
+    "heading": "Images\nthat",
+    "description": "Fragments of the world, captured one frame at a time. An ongoing collection of photographs and visual discoveries.",
+    "image": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1400&q=85",
+    "alt": "Colourful buildings overlooking the Italian coastline",
+    "caption": "Field notes / The Italian coast",
+    "link_label": "Inside the visual journal",
+    "story": "2",
+    "emphasis": "stay",
+    "ending": "\nwith us."
+  },
+  "journal": {
+    "kicker": "From the journal / 04",
+    "heading": "Latest stories"
+  },
+  "about": {
+    "kicker": "Independent in spirit / 05",
+    "heading": "Good stories\ndeserve",
+    "description": "FRAME is an independent visual journal for curious minds. We celebrate original perspectives across art, photography, travel and contemporary culture.",
+    "contact_label": "Get in touch",
+    "email": "hello@example.com",
+    "emphasis": "space.",
+    "ending": ""
+  },
+  "visibility": {
+    "spotlight": true,
+    "art": true,
+    "photography": true,
+    "journal": true,
+    "about": true,
+    "marquee": true
+  }
+}

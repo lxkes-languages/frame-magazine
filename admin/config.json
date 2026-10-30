@@ -124,6 +124,465 @@
           ]
         }
       ]
+    },
+    {
+      "name": "website",
+      "label": "Website settings",
+      "description": "Edit the magazine page. Save a draft, review it in Workflow, then Publish. The layout stays consistent.",
+      "files": [
+        {
+          "name": "homepage",
+          "label": "Homepage and branding",
+          "file": "_data/website.json",
+          "format": "json",
+          "fields": [
+            {
+              "name": "branding",
+              "label": "Branding and colours",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "name",
+                  "label": "Magazine name",
+                  "widget": "string",
+                  "pattern": [
+                    "^.{1,20}$",
+                    "Use 1–20 characters."
+                  ]
+                },
+                {
+                  "name": "logo",
+                  "label": "Logo image",
+                  "widget": "image",
+                  "required": false,
+                  "allow_multiple": false,
+                  "hint": "Optional. Leave empty to use the magazine name as a text logo."
+                },
+                {
+                  "name": "title",
+                  "label": "Browser tab title",
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Site description",
+                  "widget": "text"
+                },
+                {
+                  "name": "tagline",
+                  "label": "Masthead tagline",
+                  "widget": "string"
+                },
+                {
+                  "name": "edition",
+                  "label": "Issue / edition",
+                  "widget": "string"
+                },
+                {
+                  "name": "header_link",
+                  "label": "Header link label",
+                  "widget": "string"
+                },
+                {
+                  "name": "nav_note",
+                  "label": "Navigation note",
+                  "widget": "string"
+                },
+                {
+                  "name": "footer",
+                  "label": "Footer description",
+                  "widget": "string"
+                },
+                {
+                  "name": "colours",
+                  "label": "Colours",
+                  "widget": "object",
+                  "collapsed": true,
+                  "fields": [
+                    {
+                      "name": "paper",
+                      "label": "Background",
+                      "widget": "string",
+                      "pattern": [
+                        "^#[0-9a-fA-F]{6}$",
+                        "Use a six-digit colour such as #f3f1eb."
+                      ]
+                    },
+                    {
+                      "name": "ink",
+                      "label": "Text",
+                      "widget": "string",
+                      "pattern": [
+                        "^#[0-9a-fA-F]{6}$",
+                        "Use a six-digit colour such as #f3f1eb."
+                      ]
+                    },
+                    {
+                      "name": "accent",
+                      "label": "Accent",
+                      "widget": "string",
+                      "pattern": [
+                        "^#[0-9a-fA-F]{6}$",
+                        "Use a six-digit colour such as #f3f1eb."
+                      ]
+                    },
+                    {
+                      "name": "sage",
+                      "label": "Feature background",
+                      "widget": "string",
+                      "pattern": [
+                        "^#[0-9a-fA-F]{6}$",
+                        "Use a six-digit colour such as #f3f1eb."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "socials",
+                  "label": "Social links",
+                  "widget": "list",
+                  "required": false,
+                  "max": 8,
+                  "fields": [
+                    {
+                      "name": "label",
+                      "label": "Label",
+                      "widget": "string"
+                    },
+                    {
+                      "name": "url",
+                      "label": "Link",
+                      "widget": "string",
+                      "pattern": [
+                        "^https://",
+                        "Use a full HTTPS link."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "navigation",
+              "label": "Navigation labels",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "home",
+                  "label": "Home",
+                  "widget": "string"
+                },
+                {
+                  "name": "spotlight",
+                  "label": "Spotlight",
+                  "widget": "string"
+                },
+                {
+                  "name": "art",
+                  "label": "Art",
+                  "widget": "string"
+                },
+                {
+                  "name": "photography",
+                  "label": "Photography",
+                  "widget": "string"
+                },
+                {
+                  "name": "journal",
+                  "label": "Journal",
+                  "widget": "string"
+                },
+                {
+                  "name": "about",
+                  "label": "About",
+                  "widget": "string"
+                }
+              ]
+            },
+            {
+              "name": "intro",
+              "label": "Homepage introduction",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "headline",
+                  "label": "Headline",
+                  "widget": "string"
+                },
+                {
+                  "name": "emphasis",
+                  "label": "Italic words",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "description",
+                  "label": "Introduction",
+                  "widget": "text"
+                }
+              ]
+            },
+            {
+              "name": "spotlight",
+              "label": "Spotlight",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "heading",
+                  "label": "Section heading",
+                  "widget": "string"
+                },
+                {
+                  "name": "label",
+                  "label": "Section label",
+                  "widget": "string"
+                },
+                {
+                  "name": "kicker",
+                  "label": "Story eyebrow",
+                  "widget": "string"
+                },
+                {
+                  "name": "story",
+                  "label": "Featured story",
+                  "widget": "relation",
+                  "collection": "stories",
+                  "search_fields": [
+                    "title"
+                  ],
+                  "value_field": "{{slug}}",
+                  "display_fields": [
+                    "title"
+                  ],
+                  "required": false,
+                  "hint": "Leave empty to feature the newest published story. Publish a new story before selecting it here."
+                },
+                {
+                  "name": "link_label",
+                  "label": "Read story link label",
+                  "widget": "string"
+                }
+              ]
+            },
+            {
+              "name": "stories",
+              "label": "Fresh perspectives",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "kicker",
+                  "label": "Eyebrow",
+                  "widget": "string"
+                },
+                {
+                  "name": "heading",
+                  "label": "Section heading",
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Description",
+                  "widget": "text"
+                }
+              ]
+            },
+            {
+              "name": "marquee",
+              "label": "Scrolling strip text",
+              "widget": "text"
+            },
+            {
+              "name": "feature",
+              "label": "Photography feature",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "kicker",
+                  "label": "Eyebrow",
+                  "widget": "string"
+                },
+                {
+                  "name": "heading",
+                  "label": "Heading before italic words",
+                  "widget": "text"
+                },
+                {
+                  "name": "emphasis",
+                  "label": "Italic words",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "ending",
+                  "label": "Heading after italic words",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "description",
+                  "label": "Description",
+                  "widget": "text"
+                },
+                {
+                  "name": "image",
+                  "label": "Feature photograph",
+                  "widget": "image",
+                  "allow_multiple": false
+                },
+                {
+                  "name": "alt",
+                  "label": "Image description",
+                  "widget": "string"
+                },
+                {
+                  "name": "caption",
+                  "label": "Caption / credit",
+                  "widget": "string"
+                },
+                {
+                  "name": "link_label",
+                  "label": "Link label",
+                  "widget": "string"
+                },
+                {
+                  "name": "story",
+                  "label": "Linked story",
+                  "widget": "relation",
+                  "collection": "stories",
+                  "search_fields": [
+                    "title"
+                  ],
+                  "value_field": "{{slug}}",
+                  "display_fields": [
+                    "title"
+                  ],
+                  "required": false,
+                  "hint": "Leave empty to link to the journal. A removed story also falls back to the journal."
+                }
+              ]
+            },
+            {
+              "name": "journal",
+              "label": "Journal heading",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "kicker",
+                  "label": "Eyebrow",
+                  "widget": "string"
+                },
+                {
+                  "name": "heading",
+                  "label": "Section heading",
+                  "widget": "string"
+                }
+              ]
+            },
+            {
+              "name": "about",
+              "label": "About and contact",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "kicker",
+                  "label": "Eyebrow",
+                  "widget": "string"
+                },
+                {
+                  "name": "heading",
+                  "label": "Heading before italic words",
+                  "widget": "text"
+                },
+                {
+                  "name": "emphasis",
+                  "label": "Italic words",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "ending",
+                  "label": "Heading after italic words",
+                  "widget": "text",
+                  "required": false
+                },
+                {
+                  "name": "description",
+                  "label": "About text",
+                  "widget": "text"
+                },
+                {
+                  "name": "contact_label",
+                  "label": "Contact link label",
+                  "widget": "string"
+                },
+                {
+                  "name": "email",
+                  "label": "Contact email",
+                  "widget": "string",
+                  "required": false,
+                  "hint": "Leave empty to hide the contact link.",
+                  "pattern": [
+                    "^$|^[^\\s@?&#]+@[^\\s@?&#]+\\.[^\\s@?&#]+$",
+                    "Enter an email address or leave empty."
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "visibility",
+              "label": "Show or hide sections",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "spotlight",
+                  "label": "Spotlight",
+                  "widget": "boolean",
+                  "default": true
+                },
+                {
+                  "name": "art",
+                  "label": "Fresh perspectives",
+                  "widget": "boolean",
+                  "default": true
+                },
+                {
+                  "name": "photography",
+                  "label": "Photography feature",
+                  "widget": "boolean",
+                  "default": true
+                },
+                {
+                  "name": "journal",
+                  "label": "Journal",
+                  "widget": "boolean",
+                  "default": true
+                },
+                {
+                  "name": "about",
+                  "label": "About and contact",
+                  "widget": "boolean",
+                  "default": true
+                },
+                {
+                  "name": "marquee",
+                  "label": "Scrolling strip",
+                  "widget": "boolean",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
