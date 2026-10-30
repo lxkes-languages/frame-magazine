@@ -205,3 +205,20 @@ body:has(.article-dialog[open]) { overflow: hidden; }
 .article-body figure img { height: auto; aspect-ratio: auto; }
 .article-body figcaption { color: var(--muted); text-transform: none; letter-spacing: 0; }
 .empty-stories { grid-column: 1 / -1; color: var(--muted); }
+
+
+/* 09 — Editable website identity and copy */
+.wordmark { font-size: clamp(36px, var(--wordmark-size, 12.4vw), 190px); }
+.edition [data-tagline] { color: var(--ink); }
+.brand-image { width: min(36vw, 420px); height: clamp(60px, 9vw, 120px); object-fit: contain; }
+footer .brand-image { width: 150px; height: 45px; }
+.social-links { display: flex; flex-wrap: wrap; gap: 12px; max-width: 100%; }
+.intro h1, .intro > p, .feature h2, .about h2, #art .section-head > p { white-space: pre-line; }
+@media (max-width: 700px) {
+  .wordmark { font-size: clamp(20px, var(--wordmark-mobile-size, 18vw), 126px); }
+  .social-links { width: 100%; order: 4; }
+}
+.wordmark, .logo { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.wordmark { font-size: clamp(20px, var(--wordmark-size, 12.4vw), 190px); }
+
+@media (max-width: 700px) { .wordmark { font-size: clamp(20px, var(--wordmark-mobile-size, 18vw), 126px); } }

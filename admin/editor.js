@@ -45,6 +45,33 @@ async function startEditor() {
         ))
       );
     });
+    window.CMS.registerPreviewTemplate('homepage', function HomepagePreview(props) {
+      const h = window.h;
+      const data = props.entry.get('data').toJS();
+      const brand = data.branding || {};
+      const colours = brand.colours || {};
+      const colour = (value, fallback) => /^#[0-9a-f]{6}$/i.test(value) ? value : fallback;
+      const section = (name, title) => {
+        const value = data[name] || {};
+        if (data.visibility && data.visibility[{ stories: 'art', feature: 'photography' }[name] || name] === false) return null;
+        return h('section', { key: name, style: { borderTop: '1px solid #c9c9bd', padding: '24px 0' } },
+          h('p', { className: 'kicker' }, value.kicker || title),
+          h('h2', { style: { fontSize: '32px', whiteSpace: 'pre-line', margin: '12px 0' } }, value.heading || '', value.emphasis ? h('em', {}, ' ' + value.emphasis) : null, value.ending ? '\n' + value.ending : ''),
+          value.image ? h('img', { src: props.getAsset(value.image).toString(), alt: value.alt || '', style: { height: '280px', objectFit: 'cover' } }) : null,
+          value.caption ? h('p', {}, value.caption) : null,
+          h('p', { style: { whiteSpace: 'pre-line', lineHeight: 1.7 } }, value.description || '')
+        );
+      };
+      return h('main', { style: { padding: '30px', maxWidth: '900px', backgroundColor: colour(colours.paper, '#f3f1eb'), color: colour(colours.ink, '#20221e') } },
+        brand.logo ? h('img', { src: props.getAsset(brand.logo).toString(), alt: brand.name || '', style: { width: '220px', height: '90px', objectFit: 'contain' } }) : h('h1', { style: { fontSize: '54px', overflowWrap: 'anywhere' } }, brand.name || 'FRAME'),
+        h('p', {}, brand.tagline || ''), h('p', { className: 'kicker' }, brand.edition || ''),
+        h('h2', { style: { fontSize: '34px' } }, data.intro?.headline || '', h('em', {}, ' ' + (data.intro?.emphasis || ''))),
+        h('p', {}, data.intro?.description || ''),
+        section('spotlight', 'Spotlight'), section('stories', 'Fresh perspectives'), section('feature', 'Photography'), section('journal', 'Journal'), section('about', 'About'),
+        h('p', {}, data.about?.email || ''),
+        h('footer', {}, brand.footer || '')
+      );
+    });
     window.CMS.init({ config: { ...config, load_config_file: false } });
     document.querySelector('#editor-status').hidden = true;
   } catch (error) {
@@ -53,3 +80,4 @@ async function startEditor() {
 }
 
 startEditor();
+

@@ -77,7 +77,7 @@ const FRAMEContent = (() => {
     return link;
   }
 
-  function renderSpotlight(stories) {
+  function renderSpotlight(stories, websiteSettings) {
     const grid = document.querySelector('.spotlight-grid');
     grid.hidden = stories.length === 0;
     if (!stories.length) return;
@@ -94,7 +94,7 @@ const FRAMEContent = (() => {
     title.href = link.href;
     title.textContent = lead.title;
     const intro = element('p', '', lead.description);
-    const more = element('a', 'under-link', 'Explore the story ↗');
+    const more = element('a', 'under-link', `${websiteSettings?.spotlight.link_label || 'Explore the story'} ↗`);
     more.href = link.href;
     intro.append(more);
     hero.querySelector('.hero-caption > p').replaceWith(intro);
@@ -128,7 +128,9 @@ const FRAMEContent = (() => {
       // An authoritative manifest also removes deleted articles from the reader.
       Object.keys(articles).forEach(id => delete articles[id]);
       stories.forEach(story => { articles[story.id] = story; });
-      renderSpotlight(stories);
+      const websiteSettings = await FRAMEWebsite.ready;
+      renderSpotlight(FRAMEWebsite.selectSpotlight(stories, websiteSettings), websiteSettings);
+      FRAMEWebsite.updateStoryLinks(stories, websiteSettings);
       document.querySelector('.story-grid').replaceChildren(...(stories.length ? stories.slice(0, 9).map(storyCard) : [element('p', 'empty-stories', 'New stories are on their way. Check back soon.')]));
       document.querySelector('.journal-list').replaceChildren(...stories.map(journalRow));
       document.querySelector('.filter.active')?.click();
@@ -144,3 +146,4 @@ const FRAMEContent = (() => {
 
   return { state, imageUrl, normaliseStories, load };
 })();
+
