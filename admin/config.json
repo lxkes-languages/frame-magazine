@@ -12,10 +12,6 @@
   "publish_mode": "editorial_workflow",
   "media_folder": "uploads",
   "public_folder": "/frame-magazine/uploads",
-  "media_library": {
-    "name": "default",
-    "config": { "max_file_size": 10000000 }
-  },
   "collections": [
     {
       "name": "stories",
@@ -28,22 +24,105 @@
       "format": "json",
       "slug": "{{slug}}",
       "summary": "{{title}} — {{category}}",
-      "sortable_fields": ["date", "title"],
+      "sortable_fields": [
+        "date",
+        "title"
+      ],
       "fields": [
-        { "label": "Title", "name": "title", "widget": "string" },
-        { "label": "Category", "name": "category", "widget": "select", "options": ["Art & Culture", "Photography", "Journal"], "default": "Journal" },
-        { "label": "Date", "name": "date", "widget": "datetime", "date_format": "YYYY-MM-DD", "time_format": false, "format": "YYYY-MM-DD" },
-        { "label": "Short introduction", "name": "description", "widget": "text" },
-        { "label": "Cover photograph", "name": "image", "widget": "image", "allow_multiple": false, "hint": "Upload a JPG, PNG or WebP. Optimise large photographs first; the limit is 10 MB." },
-        { "label": "Image description", "name": "alt", "widget": "string", "hint": "Describe the photograph for readers using assistive technology." },
-        { "label": "Photographer / image credit", "name": "credit", "widget": "string", "required": false },
-        { "label": "Reading time in minutes", "name": "minutes", "widget": "number", "value_type": "int", "min": 1, "max": 120, "default": 3 },
-        { "label": "Paragraphs", "name": "text", "widget": "list", "min": 1, "field": { "label": "Paragraph", "name": "paragraph", "widget": "text" }, "hint": "Add one item for each paragraph. Text is displayed as plain text." },
-        { "label": "Photo gallery", "name": "gallery", "widget": "list", "required": false, "fields": [
-          { "label": "Photograph", "name": "image", "widget": "image", "allow_multiple": false },
-          { "label": "Image description", "name": "alt", "widget": "string" },
-          { "label": "Caption / credit", "name": "caption", "widget": "string", "required": false }
-        ] }
+        {
+          "label": "Title",
+          "name": "title",
+          "widget": "string"
+        },
+        {
+          "label": "Category",
+          "name": "category",
+          "widget": "select",
+          "options": [
+            "Art & Culture",
+            "Photography",
+            "Journal"
+          ],
+          "default": "Journal"
+        },
+        {
+          "label": "Date",
+          "name": "date",
+          "widget": "datetime",
+          "date_format": "YYYY-MM-DD",
+          "time_format": false,
+          "format": "YYYY-MM-DD"
+        },
+        {
+          "label": "Short introduction",
+          "name": "description",
+          "widget": "text"
+        },
+        {
+          "label": "Cover photograph",
+          "name": "image",
+          "widget": "image",
+          "allow_multiple": false,
+          "hint": "Upload a JPG, PNG or WebP. Optimise large photographs first; aim for less than 10 MB."
+        },
+        {
+          "label": "Image description",
+          "name": "alt",
+          "widget": "string",
+          "hint": "Describe the photograph for readers using assistive technology."
+        },
+        {
+          "label": "Photographer / image credit",
+          "name": "credit",
+          "widget": "string",
+          "required": false
+        },
+        {
+          "label": "Reading time in minutes",
+          "name": "minutes",
+          "widget": "number",
+          "value_type": "int",
+          "min": 1,
+          "max": 120,
+          "default": 3
+        },
+        {
+          "label": "Paragraphs",
+          "name": "text",
+          "widget": "list",
+          "min": 1,
+          "field": {
+            "label": "Paragraph",
+            "name": "paragraph",
+            "widget": "text"
+          },
+          "hint": "Add one item for each paragraph. Text is displayed as plain text."
+        },
+        {
+          "label": "Photo gallery",
+          "name": "gallery",
+          "widget": "list",
+          "required": false,
+          "fields": [
+            {
+              "label": "Photograph",
+              "name": "image",
+              "widget": "image",
+              "allow_multiple": false
+            },
+            {
+              "label": "Image description",
+              "name": "alt",
+              "widget": "string"
+            },
+            {
+              "label": "Caption / credit",
+              "name": "caption",
+              "widget": "string",
+              "required": false
+            }
+          ]
+        }
       ]
     }
   ]
