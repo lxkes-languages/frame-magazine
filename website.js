@@ -10,6 +10,7 @@ const FRAMEWebsite = (() => {
     'spotlight.kicker': '.hero-caption .kicker', 'stories.kicker': '#art .kicker',
     'stories.description': '#art .section-head > p', 'feature.kicker': '.feature-text .kicker',
     'feature.description': '.feature-text > p:not(.kicker)', 'feature.caption': '.feature-photo figcaption',
+    'books.kicker': '#books .kicker', 'books.description': '#books .books-description',
     'journal.kicker': '#journal .kicker', 'about.kicker': '#about > .kicker',
     'about.description': '#about div > p'
   };
@@ -32,9 +33,9 @@ const FRAMEWebsite = (() => {
   function normalise(data, base = document.baseURI) {
     if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid website settings');
     const result = { texts: {}, colours: {}, socials: [], spotlight: {}, feature: {}, visibility: {} };
-    const paths = [...Object.keys(textFields), 'branding.name', 'branding.title', 'branding.description', 'intro.headline', 'intro.emphasis', 'stories.heading', 'journal.heading', 'feature.heading', 'feature.emphasis', 'feature.ending', 'about.heading', 'about.emphasis', 'about.ending', 'about.contact_label', 'marquee'];
+    const paths = [...Object.keys(textFields), 'branding.name', 'branding.title', 'branding.description', 'intro.headline', 'intro.emphasis', 'stories.heading', 'books.heading', 'journal.heading', 'feature.heading', 'feature.emphasis', 'feature.ending', 'about.heading', 'about.emphasis', 'about.ending', 'about.contact_label', 'marquee'];
     Object.keys(data.navigation || {}).forEach(key => {
-      if (['home', 'spotlight', 'art', 'photography', 'journal', 'about'].includes(key)) paths.push(`navigation.${key}`);
+      if (['home', 'spotlight', 'art', 'photography', 'books', 'journal', 'about'].includes(key)) paths.push(`navigation.${key}`);
     });
     paths.forEach(path => {
       const value = string(get(data, path));
@@ -63,7 +64,7 @@ const FRAMEWebsite = (() => {
     result.feature.link_label = string(get(data, 'feature.link_label')) || 'Inside the visual journal';
     result.feature.image = safeUrl(get(data, 'feature.image'), base, true);
     result.feature.alt = string(get(data, 'feature.alt'));
-    for (const key of ['spotlight', 'art', 'photography', 'journal', 'about', 'marquee']) {
+    for (const key of ['spotlight', 'art', 'photography', 'books', 'journal', 'about', 'marquee']) {
       const value = get(data, `visibility.${key}`);
       if (typeof value === 'boolean') result.visibility[key] = value;
     }
@@ -99,7 +100,7 @@ const FRAMEWebsite = (() => {
   function apply(settings) {
     const values = settings.texts;
     Object.entries(textFields).forEach(([path, selector]) => text(selector, values[path]));
-    for (const section of ['home', 'spotlight', 'art', 'photography', 'journal', 'about']) text(`.nav a[href="#${section}"]`, values[`navigation.${section}`]);
+    for (const section of ['home', 'spotlight', 'art', 'photography', 'books', 'journal', 'about']) text(`.nav a[href="#${section}"]`, values[`navigation.${section}`]);
     if (values['branding.title']) document.title = values['branding.title'];
     if (values['branding.description']) document.querySelector('meta[name="description"]').content = values['branding.description'];
     Object.entries(settings.colours).forEach(([name, colour]) => document.documentElement.style.setProperty(`--${name}`, colour));
@@ -127,6 +128,7 @@ const FRAMEWebsite = (() => {
     heading('#photography-title', values['feature.heading'], values['feature.emphasis'], values['feature.ending']);
     heading('#about-title', values['about.heading'], values['about.emphasis'], values['about.ending']);
     dottedHeading('#art-title', values['stories.heading']);
+    dottedHeading('#books-title', values['books.heading']);
     dottedHeading('#journal-title', values['journal.heading']);
     if (values.marquee !== undefined) text('.marquee span', `${values.marquee} `);
     const featureImage = document.querySelector('.feature-photo img');
@@ -193,4 +195,5 @@ const FRAMEWebsite = (() => {
 
   return { normalise, safeUrl, apply, selectSpotlight, updateStoryLinks, ready: null, load };
 })();
+
 

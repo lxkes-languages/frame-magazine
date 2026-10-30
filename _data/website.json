@@ -20,7 +20,8 @@
     "photography": true,
     "journal": true,
     "about": true,
-    "marquee": true
+    "marquee": true,
+    "books": true
   },
   "stories": {
     "kicker": "A closer look / 02",
@@ -40,7 +41,8 @@
     "art": "Art & Culture",
     "photography": "Photography",
     "journal": "Journal",
-    "about": "About"
+    "about": "About",
+    "books": "Book Reviews"
   },
   "feature": {
     "heading": "Images\nthat",
@@ -75,5 +77,10 @@
     "footer": "Independent visual journal",
     "description": "FRAME — an independent visual journal of art, photography, people and places. A new perspective, in every frame.",
     "edition": "Issue 001 — A new perspective"
+  },
+  "books": {
+    "kicker": "On the bookshelf / 04",
+    "heading": "Book reviews",
+    "description": "Stories, ideas and books worth spending time with."
   }
 }

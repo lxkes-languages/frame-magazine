@@ -41,7 +41,8 @@
           "options": [
             "Art & Culture",
             "Photography",
-            "Journal"
+            "Journal",
+            "Book Reviews"
           ],
           "default": "Journal"
         },
@@ -297,6 +298,11 @@
                 {
                   "name": "about",
                   "label": "About",
+                  "widget": "string"
+                },
+                {
+                  "name": "books",
+                  "label": "Book Reviews",
                   "widget": "string"
                 }
               ]
@@ -578,6 +584,35 @@
                   "label": "Scrolling strip",
                   "widget": "boolean",
                   "default": true
+                },
+                {
+                  "name": "books",
+                  "label": "Book Reviews",
+                  "widget": "boolean",
+                  "default": true
+                }
+              ]
+            },
+            {
+              "name": "books",
+              "label": "Book reviews section",
+              "widget": "object",
+              "collapsed": true,
+              "fields": [
+                {
+                  "name": "kicker",
+                  "label": "Eyebrow",
+                  "widget": "string"
+                },
+                {
+                  "name": "heading",
+                  "label": "Section heading",
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Description",
+                  "widget": "text"
                 }
               ]
             }

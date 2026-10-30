@@ -32,6 +32,7 @@ layout: null
       <a href="#spotlight">Spotlight</a>
       <a href="#art">Art & Culture</a>
       <a href="#photography">Photography</a>
+      <a href="#books">Book Reviews</a>
       <a href="#journal">Journal</a>
       <a href="#about">About</a>
       <span class="nav-note" aria-hidden="true">A different point of view. ↙</span>
@@ -94,8 +95,13 @@ layout: null
       <figure class="feature-photo image-wrap reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1400&q=85" alt="Colourful buildings overlooking the Italian coastline" width="1400" height="1700"><figcaption>Field notes / The Italian coast</figcaption></figure>
     </section>
 
+    <section class="section page-gutter" id="books" aria-labelledby="books-title">
+      <div class="section-head"><div><p class="kicker">On the bookshelf / 04</p><h2 id="books-title">Book reviews<span class="dot">.</span></h2></div><p class="books-description">Stories, ideas and books worth spending time with.</p></div>
+      <div class="story-grid book-grid"><p class="empty-stories">Book reviews will appear here.</p></div>
+    </section>
+
     <section class="section journal page-gutter" id="journal" aria-labelledby="journal-title">
-      <div class="section-head"><div><p class="kicker">From the journal / 04</p><h2 id="journal-title">Latest stories<span class="dot">.</span></h2></div><div class="filters" role="group" aria-label="Filter stories"><button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter" type="button" data-filter="art" aria-pressed="false">Art</button><button class="filter" type="button" data-filter="photography" aria-pressed="false">Photo</button><button class="filter" type="button" data-filter="journal" aria-pressed="false">Journal</button></div></div>
+      <div class="section-head"><div><p class="kicker">From the journal / 04</p><h2 id="journal-title">Latest stories<span class="dot">.</span></h2></div><div class="filters" role="group" aria-label="Filter stories"><button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter" type="button" data-filter="art" aria-pressed="false">Art</button><button class="filter" type="button" data-filter="photography" aria-pressed="false">Photo</button><button class="filter" type="button" data-filter="books" aria-pressed="false">Books</button><button class="filter" type="button" data-filter="journal" aria-pressed="false">Journal</button></div></div>
       <p id="content-status" class="content-status" role="status">Loading the latest stories…</p>
       <p class="sr-only" id="filter-status" role="status">3 stories</p>
       <div class="journal-list">
@@ -112,5 +118,6 @@ layout: null
   <dialog id="article-dialog" class="article-dialog" aria-labelledby="article-title"><button class="close-dialog" type="button" aria-label="Close article" autofocus>✕</button><div id="article-content"></div></dialog>
 </body>
 </html>
+
 
 
