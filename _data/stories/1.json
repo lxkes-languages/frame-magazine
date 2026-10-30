@@ -1,15 +1,14 @@
 {
-  "category": "Art & Culture",
-  "title": "The spaces between things",
-  "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1400&q=85",
   "alt": "Art in a gallery",
   "text": [
-    "Some spaces ask us to slow down. The light, the silence, the distance between one object and the next: all of it shapes how we look.",
-    "This is a sample editorial story. Replace this writing with your own perspective, research, photography or interviews before publishing FRAME as a magazine."
+    "Some spaces ask us to slow down. The light, the silence, the distance between one object and the next: all of it shapes how we look."
   ],
   "date": "2026-10-29",
-  "description": "Finding meaning in the overlooked.",
-  "minutes": 5,
+  "gallery": [],
+  "title": "The spaces between things",
   "credit": "Unsplash — sample image",
-  "gallery": []
+  "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1400&q=85",
+  "description": "Finding meaning in the overlooked.",
+  "category": "Art & Culture",
+  "minutes": 5
 }
