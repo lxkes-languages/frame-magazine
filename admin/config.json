@@ -521,17 +521,18 @@
                 {
                   "name": "contact_label",
                   "label": "Contact link label",
-                  "widget": "string"
+                  "widget": "string",
+                  "hint": "What readers see, for example Instagram or Follow me on Instagram."
                 },
                 {
-                  "name": "email",
-                  "label": "Contact email",
+                  "name": "contact_url",
+                  "label": "Contact or social link",
                   "widget": "string",
                   "required": false,
-                  "hint": "Leave empty to hide the contact link.",
+                  "hint": "Paste a full HTTPS link, such as your Instagram profile. Leave empty to hide the link.",
                   "pattern": [
-                    "^$|^[^\\s@?&#]+@[^\\s@?&#]+\\.[^\\s@?&#]+$",
-                    "Enter an email address or leave empty."
+                    "^$|^https://[^\\s]+$",
+                    "Use a full https:// link or leave empty."
                   ]
                 }
               ]

@@ -9,10 +9,10 @@
     "kicker": "Independence ~ me / 05",
     "heading": "Stories I find",
     "description": "Luke. is an independent visual journal for things that interest me.",
-    "contact_label": "https://www.instagram.com/lukesellars_",
-    "email": "",
+    "contact_label": "Instagram",
     "emphasis": "interesting.",
-    "ending": ""
+    "ending": "",
+    "contact_url": "https://www.instagram.com/lukesellars_"
   },
   "visibility": {
     "spotlight": true,

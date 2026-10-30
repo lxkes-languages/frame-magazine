@@ -48,6 +48,9 @@ const FRAMEWebsite = (() => {
     const email = get(data, 'about.email');
     result.email = typeof email === 'string' && /^[^\s@?&#]+@[^\s@?&#]+\.[^\s@?&#]+$/.test(email) ? email : '';
     result.emailProvided = typeof email === 'string';
+    const contactUrl = get(data, 'about.contact_url');
+    result.contactProvided = typeof contactUrl === 'string' || result.emailProvided;
+    result.contactHref = typeof contactUrl === 'string' ? safeUrl(contactUrl, base) : (result.email ? `mailto:${result.email}` : '');
     const socials = get(data, 'branding.socials');
     if (Array.isArray(socials)) result.socials = socials.slice(0, 8).flatMap(social => {
       if (!social || typeof social.label !== 'string' || !social.label.trim()) return [];
@@ -136,10 +139,10 @@ const FRAMEWebsite = (() => {
       arrow.setAttribute('aria-hidden', 'true');
       contact.replaceChildren(document.createTextNode(values['about.contact_label']), arrow);
     }
-    if (settings.emailProvided) {
-      contact.hidden = !settings.email;
-      if (settings.email) {
-        contact.href = `mailto:${settings.email}`;
+    if (settings.contactProvided) {
+      contact.hidden = !settings.contactHref;
+      if (settings.contactHref) {
+        contact.href = settings.contactHref;
         contact.removeAttribute('title');
       }
     }
@@ -190,3 +193,4 @@ const FRAMEWebsite = (() => {
 
   return { normalise, safeUrl, apply, selectSpotlight, updateStoryLinks, ready: null, load };
 })();
+
