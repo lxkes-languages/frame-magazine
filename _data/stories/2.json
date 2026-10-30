@@ -1,15 +1,14 @@
 {
-  "category": "Photography",
-  "title": "Somewhere, slowly",
-  "image": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=85",
   "alt": "Mountain lake",
   "text": [
-    "A landscape changes with the hour. What first appears still becomes a collection of small movements, colours and reflections.",
-    "This sample article demonstrates the full-screen reading experience. Add your own work and image credits to make it yours."
+    "A landscape changes with the hour. What first appears still becomes a collection of small movements, colours and reflections."
   ],
   "date": "2026-10-29",
-  "description": "A photographic study in stillness.",
-  "minutes": 4,
+  "gallery": [],
+  "title": "Somewhere, slowly",
   "credit": "Unsplash — sample image",
-  "gallery": []
+  "image": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=85",
+  "description": "A photographic study in stillness.",
+  "category": "Photography",
+  "minutes": 1
 }
