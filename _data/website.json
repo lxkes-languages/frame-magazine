@@ -1,8 +1,13 @@
 {
   "marquee": "AN INDEPENDENT PERSPECTIVE ✳ LIFE ✳ CULTURE ✳ PHOTOGRAPHY ✳",
+  "books": {
+    "kicker": "On the bookshelf / 04",
+    "heading": "Book reviews",
+    "description": "Stories, ideas and books worth spending time with."
+  },
   "intro": {
-    "headline": "The art of",
-    "emphasis": "looking closer.",
+    "headline": "look",
+    "emphasis": "closer.",
     "description": "Photography, people, places and ideas that deserve a second look."
   },
   "about": {
@@ -77,10 +82,5 @@
     "footer": "Independent visual journal",
     "description": "FRAME — an independent visual journal of art, photography, people and places. A new perspective, in every frame.",
     "edition": "Issue 001 — A new perspective"
-  },
-  "books": {
-    "kicker": "On the bookshelf / 04",
-    "heading": "Book reviews",
-    "description": "Stories, ideas and books worth spending time with."
   }
 }
