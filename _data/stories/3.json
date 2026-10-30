@@ -1,15 +1,14 @@
 {
-  "category": "Journal",
-  "title": "The shape of a city",
-  "image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=85",
   "alt": "Architecture",
   "text": [
-    "Cities are made of buildings, but also of memories, routines and the paths we take without thinking.",
-    "This is placeholder copy for your future journal. You can expand it with photographs, interviews and longer essays."
+    "Cities are made of buildings, but also of memories, routines and the paths we take without thinking."
   ],
   "date": "2026-10-29",
-  "description": "What architecture tells us about belonging.",
-  "minutes": 3,
+  "gallery": [],
+  "title": "The shape of a city",
   "credit": "Unsplash — sample image",
-  "gallery": []
+  "image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=85",
+  "description": "What architecture tells us about belonging.",
+  "category": "Journal",
+  "minutes": 1
 }
