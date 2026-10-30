@@ -3,7 +3,7 @@
 
 const FRAMEContent = (() => {
   const state = { loaded: false };
-  const categories = { 'Art & Culture': 'art', Photography: 'photography', Journal: 'journal' };
+  const categories = { 'Art & Culture': 'art', Photography: 'photography', Journal: 'journal', 'Book Reviews': 'books' };
 
   function imageUrl(value, base = document.baseURI) {
     if (typeof value !== 'string' || !value.trim()) return null;
@@ -132,6 +132,8 @@ const FRAMEContent = (() => {
       renderSpotlight(FRAMEWebsite.selectSpotlight(stories, websiteSettings), websiteSettings);
       FRAMEWebsite.updateStoryLinks(stories, websiteSettings);
       document.querySelector('.story-grid').replaceChildren(...(stories.length ? stories.slice(0, 9).map(storyCard) : [element('p', 'empty-stories', 'New stories are on their way. Check back soon.')]));
+      const reviews = stories.filter(story => story.category === 'Book Reviews');
+      document.querySelector('.book-grid').replaceChildren(...(reviews.length ? reviews.map(storyCard) : [element('p', 'empty-stories', 'Book reviews will appear here.')]));
       document.querySelector('.journal-list').replaceChildren(...stories.map(journalRow));
       document.querySelector('.filter.active')?.click();
       status.hidden = true;
@@ -146,4 +148,5 @@ const FRAMEContent = (() => {
 
   return { state, imageUrl, normaliseStories, load };
 })();
+
 
