@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,7 +12,7 @@
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="stylesheet" href="style.css">
   <script src="articles.js" defer></script>
-  <script src="website.js" defer></script>
+  <script src="website.js?v={{ site.time | date: '%s' }}" defer></script>
   <script src="content.js" defer></script>
   <script src="script.js" defer></script>
 </head>
@@ -102,7 +105,7 @@
       </div>
     </section>
 
-    <section class="about page-gutter" id="about" aria-labelledby="about-title"><p class="kicker">Independent in spirit / 05</p><div><h2 id="about-title">Good stories<br>deserve <em>space.</em></h2><p>FRAME is an independent visual journal for curious minds. We celebrate original perspectives across art, photography, travel and contemporary culture.</p><a href="mailto:hello@example.com" class="under-link" title="Sample contact — replace with your email address">Get in touch <span aria-hidden="true">↗</span></a></div></section>
+    <section class="about page-gutter" id="about" aria-labelledby="about-title"><p class="kicker">Independent in spirit / 05</p><div><h2 id="about-title">Good stories<br>deserve <em>space.</em></h2><p>FRAME is an independent visual journal for curious minds. We celebrate original perspectives across art, photography, travel and contemporary culture.</p>{% assign about_url = site.data.website.about.contact_url | default: '' %}{% assign about_protocol = about_url | slice: 0, 8 %}<a href="{% if about_protocol == 'https://' %}{{ about_url | escape }}{% else %}#about{% endif %}" class="under-link"{% unless about_protocol == 'https://' %} hidden{% endunless %}>{{ site.data.website.about.contact_label | default: 'Instagram' | escape }} <span aria-hidden="true">↗</span></a></div></section>
   </main>
 
   <footer class="page-gutter"><a class="logo" href="#home">FRAME<span class="dot">.</span></a><span><span data-footer-label>Independent visual journal</span> © <span id="year">2026</span></span><nav class="social-links" aria-label="Social links" hidden></nav><a href="admin/">Editor login</a><a href="#home">Back to top ↑</a></footer>

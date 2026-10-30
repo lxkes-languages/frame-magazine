@@ -50,6 +50,10 @@ function checkFields(object,prefix='') {for(const [key,value] of Object.entries(
 checkFields(data);
 for(const filename of ['website.js','content.js','script.js','admin/editor.js'])new Script(await read(filename),{filename});
 const html=await read('index.html');
-assert.ok(html.indexOf('src="website.js"')<html.indexOf('src="content.js"'));
+assert.ok(html.indexOf('src="website.js')<html.indexOf('src="content.js"'));
 assert.ok((await read('website.json')).includes('site.data.website | jsonify'));
 console.log('PASS: website settings, schema coverage, draft workflow, upload subpaths, unsafe links/colours/email, selected/deleted spotlight and script order.');
+
+assert.ok(!html.includes('mailto:hello@example.com'), 'No email-app fallback should remain');
+assert.ok(html.includes('site.data.website.about.contact_url'), 'Build the contact link from published settings');
+assert.ok(html.includes('website.js?v='), 'Refresh the settings script on deployment');
